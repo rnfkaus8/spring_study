@@ -13,37 +13,37 @@ import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
 
 public class ApplicationContextBasicFindTest {
-	
-	AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-	
-	@Test
-	@DisplayName("ºó ÀÌ¸§À¸·Î Á¶È¸")
-	void findBeanByName() {
-		MemberService memberService = ac.getBean("memberService", MemberService.class);
-		System.out.println("memberService = " + memberService);
-		System.out.println("memberSerivce.getClass() = " + memberService.getClass());
-		assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
-	}
-	
-	@Test
-	@DisplayName("ÀÌ¸§¾øÀÌ Å¸ÀÔÀ¸·Î Á¶È¸")
-	void findBeanByType() {
-		MemberService memberService = ac.getBean(MemberService.class);
-		assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
-	}
-	
-	@Test
-	@DisplayName("±¸Ã¼ Å¸ÀÔÀ¸·Î Á¶È¸")
-	void findBeanByName2() {
-		MemberService memberService = ac.getBean("memberService", MemberServiceImpl.class);
-		assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
-	}
-	
-	@Test
-	@DisplayName("ºó ÀÌ¸§À¸·Î Á¶È¸°¡ ¾ÈµÉ ‹š")
-	void findByUnknownBeanName() {
+
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
+    @Test
+    @DisplayName("ë¹ˆ ì´ë¦„ìœ¼ë¡œ ì¡°íšŒ")
+    void findBeanByName() {
+        MemberService memberService = ac.getBean("memberService", MemberService.class);
+        System.out.println("memberService = " + memberService);
+        System.out.println("memberSerivce.getClass() = " + memberService.getClass());
+        assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
+    }
+
+    @Test
+    @DisplayName("ì´ë¦„ì—†ì´ íƒ€ìž…ìœ¼ë¡œ ì¡°íšŒ")
+    void findBeanByType() {
+        MemberService memberService = ac.getBean(MemberService.class);
+        assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
+    }
+
+    @Test
+    @DisplayName("êµ¬ì²´ íƒ€ìž…ìœ¼ë¡œ ì¡°íšŒ")
+    void findBeanByName2() {
+        MemberService memberService = ac.getBean("memberService", MemberServiceImpl.class);
+        assertThat(memberService).isInstanceOf(MemberServiceImpl.class);
+    }
+
+    @Test
+    @DisplayName("ë¹ˆ ì´ë¦„ìœ¼ë¡œ ì¡°íšŒê°€ ì•ˆë  ë–„")
+    void findByUnknownBeanName() {
 //		MemberService memberService = ac.getBean("xxxxx", MemberService.class);
-		assertThrows(NoSuchBeanDefinitionException.class, ()->ac.getBean("xxxxx", MemberService.class));
-		
-	}
+        assertThrows(NoSuchBeanDefinitionException.class, ()->ac.getBean("xxxxx", MemberService.class));
+
+    }
 }

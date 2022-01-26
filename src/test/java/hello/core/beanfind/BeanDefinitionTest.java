@@ -8,19 +8,19 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import hello.core.AppConfig;
 
 public class BeanDefinitionTest {
-	AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
 
-	// GenericXmlApplicationContext ac = ne	GenericXmlApplicationContext("appConfig.xml");
+    // GenericXmlApplicationContext ac = ne	GenericXmlApplicationContext("appConfig.xml");
 
-	@Test
-	@DisplayName("∫Û º≥¡§ ∏ﬁ≈∏¡§∫∏ »Æ¿Œ")
-	void findApplicationBean() {
-		String[] beanDefinitionNames = ac.getBeanDefinitionNames();
-		for (String beanDefinitionName : beanDefinitionNames) {
-			BeanDefinition beanDefinition = ac.getBeanDefinition(beanDefinitionName);
-			if (beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION) {
-				System.out.println("beanDefinitionName" + beanDefinitionName + " beanDefinition = " + beanDefinition);
-			}
-		}
-	}
+    @Test
+    @DisplayName("Îπà ÏÑ§Ï†ï Î©îÌÉÄÏ†ïÎ≥¥ ÌôïÏù∏")
+    void findApplicationBean() {
+        String[] beanDefinitionNames = ac.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            BeanDefinition beanDefinition = ac.getBeanDefinition(beanDefinitionName);
+            if (beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION) {
+                System.out.println("beanDefinitionName" + beanDefinitionName + " beanDefinition = " + beanDefinition);
+            }
+        }
+    }
 }

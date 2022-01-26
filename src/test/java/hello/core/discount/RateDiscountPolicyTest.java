@@ -8,30 +8,30 @@ import hello.core.member.Grade;
 import hello.core.member.Member;
 
 public class RateDiscountPolicyTest {
-	
-	RateDiscountPolicy discountPolicy = new RateDiscountPolicy();
-	
-	@Test
-	@DisplayName("VIP´Â 10% ÇÒÀÎÀÌ Àû¿ëµÇ¾î¾ß ÇÑ´Ù.")
-	void vip_o() {
-		// given
-		Member vip = new Member(1L, "memberVIP", Grade.VIP);
-		// when
-		int discount = discountPolicy.discount(vip, 10000);
-		// then
-		assertThat(discount).isEqualTo(1000);
-		
-	}
-	
-	@Test
-	@DisplayName("VIP°¡ ¾Æ´Ï¸é 10% ÇÒÀÎÀº Àû¿ëµÇÁö ¾Ê¾Æ¾ß ÇÑ´Ù.")
-	void vip_x() {
-		// given
-		Member basic = new Member(1L, "memberBASIC", Grade.BASIC);
-		// when
-		int discount = discountPolicy.discount(basic, 10000);
-		// then
-		assertThat(discount).isEqualTo(0);
-	}
-	
+
+    RateDiscountPolicy discountPolicy = new RateDiscountPolicy();
+
+    @Test
+    @DisplayName("VIPëŠ” 10% í• ì¸ì´ ì ìš©ë˜ì–´ì•¼ í•œë‹¤.")
+    void vip_o() {
+        // given
+        Member vip = new Member(1L, "memberVIP", Grade.VIP);
+        // when
+        int discount = discountPolicy.discount(vip, 10000);
+        // then
+        assertThat(discount).isEqualTo(1000);
+
+    }
+
+    @Test
+    @DisplayName("VIPê°€ ì•„ë‹ˆë©´ 10% í• ì¸ì€ ì ìš©ë˜ì§€ ì•Šì•„ì•¼ í•œë‹¤.")
+    void vip_x() {
+        // given
+        Member basic = new Member(1L, "memberBASIC", Grade.BASIC);
+        // when
+        int discount = discountPolicy.discount(basic, 10000);
+        // then
+        assertThat(discount).isEqualTo(0);
+    }
+
 }

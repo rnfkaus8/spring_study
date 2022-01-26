@@ -17,62 +17,62 @@ import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
 
 public class ApplicationContextExtendsFindTest {
-	
-	AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
-	
-	@Test
-	@DisplayName("ºÎ¸ğ Å¸ÀÔÀ¸·Î Á¶È¸ ½Ã, ÀÚ½ÄÀÌ µÑ ÀÌ»ó ÀÖÀ¸¸é, Áßº¹ ¿À·ù°¡ ¹ß»ıÇÑ´Ù.")
-	void findBeanByParentTypeDuplicate() {
+
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
+
+    @Test
+    @DisplayName("ë¶€ëª¨ íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ ì‹œ, ìì‹ì´ ë‘˜ ì´ìƒ ìˆìœ¼ë©´, ì¤‘ë³µ ì˜¤ë¥˜ê°€ ë°œìƒí•œë‹¤.")
+    void findBeanByParentTypeDuplicate() {
 //		DiscountPolicy bean = ac.getBean(DiscountPolicy.class);
-		assertThrows(NoUniqueBeanDefinitionException.class, ()->ac.getBean(DiscountPolicy.class));
-	}
-	
-	@Test
-	@DisplayName("ºÎ¸ğ Å¸ÀÔÀ¸·Î Á¶È¸ ½Ã, ÀÚ½ÄÀÌ µÑ ÀÌ»ó ÀÖÀ¸¸é, ºó ÀÌ¸§À» ÁöÁ¤ÇÏ¸é µÈ´Ù.")
-	void findBeanByParentTypeBeanName() {
-		DiscountPolicy rateDiscountPolicy = ac.getBean("rateDiscountPolicy", DiscountPolicy.class);
-		assertThat(rateDiscountPolicy).isInstanceOf(RateDiscountPolicy.class);
-	}
-	
-	@Test
-	@DisplayName("Æ¯Á¤ ÇÏÀ§ Å¸ÀÔÀ¸·Î Á¶È¸")
-	void findBeanBySubType() {
-		RateDiscountPolicy rateDiscountPolicy = ac.getBean(RateDiscountPolicy.class);
-		assertThat(rateDiscountPolicy).isInstanceOf(RateDiscountPolicy.class);
-	}
-	
-	@Test
-	@DisplayName("ºÎ¸ğ Å¸ÀÔÀ¸·Î ¸ğµÎ Á¶È¸ÇÏ±â")
-	void findAllBeanByParentType() {
-		Map<String, DiscountPolicy> beansOfType = ac.getBeansOfType(DiscountPolicy.class);
-		assertThat(beansOfType.size()).isEqualTo(2);
-		
-		for (String key : beansOfType.keySet()) {
-			System.out.println("key = " + key + ", value = " + beansOfType.get(key));
-		}
-	}
-	
-	@Test
-	@DisplayName("ºÎ¸ğ Å¸ÀÔÀ¸·Î ¸ğµÎ Á¶È¸ÇÏ±â - Object")
-	void findAllBeanByObjectType() {
-		Map<String, Object> beansOfType = ac.getBeansOfType(Object.class);
-		for (String key : beansOfType.keySet()) {
-			System.out.println("key = " + key + ", value = " + beansOfType.get(key));
-		}
-	}
-	
-	
-	@Configuration
-	static class TestConfig{
-		@Bean
-		public DiscountPolicy rateDiscountPolicy() {
-			return new RateDiscountPolicy();
-		}
-		@Bean
-		public DiscountPolicy fixDiscountPolicy() {
-			return new FixDiscountPolicy();
-		}
-	}
-	
-	
+        assertThrows(NoUniqueBeanDefinitionException.class, ()->ac.getBean(DiscountPolicy.class));
+    }
+
+    @Test
+    @DisplayName("ë¶€ëª¨ íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ ì‹œ, ìì‹ì´ ë‘˜ ì´ìƒ ìˆìœ¼ë©´, ë¹ˆ ì´ë¦„ì„ ì§€ì •í•˜ë©´ ëœë‹¤.")
+    void findBeanByParentTypeBeanName() {
+        DiscountPolicy rateDiscountPolicy = ac.getBean("rateDiscountPolicy", DiscountPolicy.class);
+        assertThat(rateDiscountPolicy).isInstanceOf(RateDiscountPolicy.class);
+    }
+
+    @Test
+    @DisplayName("íŠ¹ì • í•˜ìœ„ íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ")
+    void findBeanBySubType() {
+        RateDiscountPolicy rateDiscountPolicy = ac.getBean(RateDiscountPolicy.class);
+        assertThat(rateDiscountPolicy).isInstanceOf(RateDiscountPolicy.class);
+    }
+
+    @Test
+    @DisplayName("ë¶€ëª¨ íƒ€ì…ìœ¼ë¡œ ëª¨ë‘ ì¡°íšŒí•˜ê¸°")
+    void findAllBeanByParentType() {
+        Map<String, DiscountPolicy> beansOfType = ac.getBeansOfType(DiscountPolicy.class);
+        assertThat(beansOfType.size()).isEqualTo(2);
+
+        for (String key : beansOfType.keySet()) {
+            System.out.println("key = " + key + ", value = " + beansOfType.get(key));
+        }
+    }
+
+    @Test
+    @DisplayName("ë¶€ëª¨ íƒ€ì…ìœ¼ë¡œ ëª¨ë‘ ì¡°íšŒí•˜ê¸° - Object")
+    void findAllBeanByObjectType() {
+        Map<String, Object> beansOfType = ac.getBeansOfType(Object.class);
+        for (String key : beansOfType.keySet()) {
+            System.out.println("key = " + key + ", value = " + beansOfType.get(key));
+        }
+    }
+
+
+    @Configuration
+    static class TestConfig{
+        @Bean
+        public DiscountPolicy rateDiscountPolicy() {
+            return new RateDiscountPolicy();
+        }
+        @Bean
+        public DiscountPolicy fixDiscountPolicy() {
+            return new FixDiscountPolicy();
+        }
+    }
+
+
 }

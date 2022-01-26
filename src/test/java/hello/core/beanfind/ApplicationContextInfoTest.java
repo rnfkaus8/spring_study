@@ -8,32 +8,32 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import hello.core.AppConfig;
 
 public class ApplicationContextInfoTest {
-	
-	AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
-	
-	@Test
-	@DisplayName("∏µÁ ∫Û √‚∑¬«œ±‚")
-	void findAllBean() {
-		String[] beanDefinitionNames =  ac.getBeanDefinitionNames();
-		for (String beanDefinitionName : beanDefinitionNames) {
-			Object bean = ac.getBean(beanDefinitionName);
-			System.out.println("name = " + beanDefinitionName + " object = " + bean);
-			
-		}
-	}
-	
-	
-	@Test
-	@DisplayName("æ÷«√∏Æƒ…¿Ãº« ∫Û √‚∑¬«œ±‚")
-	void findApplicationBean() {
-		String[] beanDefinitionNames =  ac.getBeanDefinitionNames();
-		for (String beanDefinitionName : beanDefinitionNames) {
-			BeanDefinition beanDefinition = ac.getBeanDefinition(beanDefinitionName);
-			if(beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION) {
-				Object bean = ac.getBean(beanDefinitionName);
-				System.out.println("name = " + beanDefinitionName + " object = " + bean);
-			}
-		}
-	}
-	
+
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
+    @Test
+    @DisplayName("Î™®Îì† Îπà Ï∂úÎ†•ÌïòÍ∏∞")
+    void findAllBean() {
+        String[] beanDefinitionNames =  ac.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            Object bean = ac.getBean(beanDefinitionName);
+            System.out.println("name = " + beanDefinitionName + " object = " + bean);
+
+        }
+    }
+
+
+    @Test
+    @DisplayName("Ïï†ÌîåÎ¶¨ÏºÄÏù¥ÏÖò Îπà Ï∂úÎ†•ÌïòÍ∏∞")
+    void findApplicationBean() {
+        String[] beanDefinitionNames =  ac.getBeanDefinitionNames();
+        for (String beanDefinitionName : beanDefinitionNames) {
+            BeanDefinition beanDefinition = ac.getBeanDefinition(beanDefinitionName);
+            if(beanDefinition.getRole() == BeanDefinition.ROLE_APPLICATION) {
+                Object bean = ac.getBean(beanDefinitionName);
+                System.out.println("name = " + beanDefinitionName + " object = " + bean);
+            }
+        }
+    }
+
 }

@@ -1,10 +1,10 @@
 package hello.core.singleton;
 
 public class SingletonService {
-	// 1. static ¿µ¿ª¿¡ °´Ã¼¸¦ µü 1°³¸¸ »ı¼ºÇØµĞ´Ù.
+	// 1. static ì˜ì—­ì— ê°ì²´ë¥¼ ë”± 1ê°œë§Œ ìƒì„±í•´ë‘”ë‹¤.
 	private static final SingletonService instance = new SingletonService();
 
-	// 2. publicÀ¸·Î ¿­¾î¼­ °´Ã¼ ÀÎ½ºÅÍ½º°¡ ÇÊ¿äÇÏ¸é ÀÌ static ¸Ş¼­µå¸¦ ÅëÇØ¼­¸¸ Á¶È¸ÇÏµµ·Ï Çã¿ëÇÑ´Ù.
+	// 2. publicìœ¼ë¡œ ì—´ì–´ì„œ ê°ì²´ ì¸ìŠ¤í„°ìŠ¤ê°€ í•„ìš”í•˜ë©´ ì´ static ë©”ì„œë“œë¥¼ í†µí•´ì„œë§Œ ì¡°íšŒí•˜ë„ë¡ í—ˆìš©í•œë‹¤.
 	public static SingletonService getInstance() {
 		return instance;
 	}
@@ -13,6 +13,6 @@ public class SingletonService {
 	}
 
 	public void logic() {
-		System.out.println("½Ì±ÛÅæ °´Ã¼ ·ÎÁ÷ È£Ãâ");
+		System.out.println("ì‹±ê¸€í†¤ ê°ì²´ ë¡œì§ í˜¸ì¶œ");
 	}
 }

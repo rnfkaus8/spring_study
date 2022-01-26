@@ -17,45 +17,45 @@ import hello.core.member.MemoryMemberRepository;
 
 public class ApplicationContextSameBeanFindTest {
 
-	AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SameBeanConfig.class);
-	
-	@Test
-	@DisplayName("Å¸ÀÔÀ¸·Î Á¶È¸ ½Ã °°Àº Å¸ÀÔÀÌ 2°³ ÀÌ»ó ÀÖÀ¸¸é, Áßº¹ ¿À·ù°¡ ¹ß»ıÇÑ´Ù.")
-	void findBeanByTypeDuplicate() {
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(SameBeanConfig.class);
+
+    @Test
+    @DisplayName("íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ ì‹œ ê°™ì€ íƒ€ì…ì´ 2ê°œ ì´ìƒ ìˆìœ¼ë©´, ì¤‘ë³µ ì˜¤ë¥˜ê°€ ë°œìƒí•œë‹¤.")
+    void findBeanByTypeDuplicate() {
 //		ac.getBean(MemberRepository.class);
-		assertThrows(NoUniqueBeanDefinitionException.class, ()->ac.getBean(MemberRepository.class));
-	}
-	
-	@Test
-	@DisplayName("Å¸ÀÔÀ¸·Î Á¶È¸ ½Ã °°Àº Å¸ÀÔÀÌ 2°³ ÀÌ»ó ÀÖÀ¸¸é, ºó ÀÌ¸§À» ÁöÁ¤ÇÏ¸é µÈ´Ù")
-	void findBeanByName() {
-		MemberRepository memberRepository = ac.getBean("memberRepository", MemberRepository.class);
-		assertThat(memberRepository).isInstanceOf(MemberRepository.class);
-	}
-	
-	@Test
-	@DisplayName("Æ¯Á¤ Å¸ÀÔÀ» ¸ğµÎ Á¶È¸ÇÏ±â")
-	void findAllBeanByType() {
-		Map<String, MemberRepository> beansOfType = ac.getBeansOfType(MemberRepository.class);
-		for (String key : beansOfType.keySet()) {
-			System.out.println("key = " + key + ", value = " + beansOfType.get(key));
-		}
-		System.err.println("beansOfType = " + beansOfType);
-		assertThat(beansOfType.size()).isEqualTo(2);
-	}
-	
-	@Configuration
-	static class SameBeanConfig {
-		
-		@Bean
-		public MemberRepository memberRepository() {
-			return new MemoryMemberRepository();
-		}
-		
-		@Bean
-		public MemberRepository memberRepository2() {
-			return new MemoryMemberRepository();
-		}
-		
-	}
+        assertThrows(NoUniqueBeanDefinitionException.class, ()->ac.getBean(MemberRepository.class));
+    }
+
+    @Test
+    @DisplayName("íƒ€ì…ìœ¼ë¡œ ì¡°íšŒ ì‹œ ê°™ì€ íƒ€ì…ì´ 2ê°œ ì´ìƒ ìˆìœ¼ë©´, ë¹ˆ ì´ë¦„ì„ ì§€ì •í•˜ë©´ ëœë‹¤")
+    void findBeanByName() {
+        MemberRepository memberRepository = ac.getBean("memberRepository", MemberRepository.class);
+        assertThat(memberRepository).isInstanceOf(MemberRepository.class);
+    }
+
+    @Test
+    @DisplayName("íŠ¹ì • íƒ€ì…ì„ ëª¨ë‘ ì¡°íšŒí•˜ê¸°")
+    void findAllBeanByType() {
+        Map<String, MemberRepository> beansOfType = ac.getBeansOfType(MemberRepository.class);
+        for (String key : beansOfType.keySet()) {
+            System.out.println("key = " + key + ", value = " + beansOfType.get(key));
+        }
+        System.err.println("beansOfType = " + beansOfType);
+        assertThat(beansOfType.size()).isEqualTo(2);
+    }
+
+    @Configuration
+    static class SameBeanConfig {
+
+        @Bean
+        public MemberRepository memberRepository() {
+            return new MemoryMemberRepository();
+        }
+
+        @Bean
+        public MemberRepository memberRepository2() {
+            return new MemoryMemberRepository();
+        }
+
+    }
 }

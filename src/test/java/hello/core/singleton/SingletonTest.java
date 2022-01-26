@@ -7,37 +7,53 @@ import org.junit.jupiter.api.Test;
 
 import hello.core.AppConfig;
 import hello.core.member.MemberService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class SingletonTest {
-	@Test
-	@DisplayName("½ºÇÁ¸µ ¾ø´Â ¼ø¼öÇÑ DI ÄÁÅ×ÀÌ³Ê")
-	void pureContainer() {
-		AppConfig appConfig = new AppConfig();
-		// 1. Á¶È¸: È£ÃâÇÒ ¶§ ¸¶´Ù °´Ã¼¸¦ »ı¼º
-		MemberService memberService1 = appConfig.memberService();
-		// 2. Á¶È¸: È£ÃâÇÒ ¶§ ¸¶´Ù °´Ã¼¸¦ »ı¼º
-		MemberService memberService2 = appConfig.memberService();
-		// ÂüÁ¶°ªÀÌ ´Ù¸¥ °ÍÀ» È®ÀÎ
-		System.out.println("memberService1 = " + memberService1);
-		System.out.println("memberService2 = " + memberService2);
-		// memberService1 != memberService2
-		assertThat(memberService1).isNotSameAs(memberService2);
-	}
+    @Test
+    @DisplayName("ìŠ¤í”„ë§ ì—†ëŠ” ìˆœìˆ˜í•œ DI ì»¨í…Œì´ë„ˆ")
+    void pureContainer() {
+        AppConfig appConfig = new AppConfig();
+        // 1. ì¡°íšŒ: í˜¸ì¶œí•  ë•Œ ë§ˆë‹¤ ê°ì²´ë¥¼ ìƒì„±
+        MemberService memberService1 = appConfig.memberService();
+        // 2. ì¡°íšŒ: í˜¸ì¶œí•  ë•Œ ë§ˆë‹¤ ê°ì²´ë¥¼ ìƒì„±
+        MemberService memberService2 = appConfig.memberService();
+        // ì°¸ì¡°ê°’ì´ ë‹¤ë¥¸ ê²ƒì„ í™•ì¸
+        System.out.println("memberService1 = " + memberService1);
+        System.out.println("memberService2 = " + memberService2);
+        // memberService1 != memberService2
+        assertThat(memberService1).isNotSameAs(memberService2);
+    }
 
-	@Test
-	@DisplayName("½Ì±ÛÅæ ÆĞÅÏÀ» Àû¿ëÇÑ °´Ã¼ »ç¿ë")
-	public void singletonServiceTest() {
-		// privateÀ¸·Î »ı¼ºÀÚ¸¦ ¸·¾ÆµÎ¾ú´Ù. ÄÄÆÄÀÏ ¿À·ù°¡ ¹ß»ıÇÑ´Ù.
-		// new SingletonService();
-		// 1. Á¶È¸: È£ÃâÇÒ ¶§ ¸¶´Ù °°Àº °´Ã¼¸¦ ¹İÈ¯
-		SingletonService singletonService1 = SingletonService.getInstance();
-		// 2. Á¶È¸: È£ÃâÇÒ ¶§ ¸¶´Ù °°Àº °´Ã¼¸¦ ¹İÈ¯
-		SingletonService singletonService2 = SingletonService.getInstance();
-		// ÂüÁ¶°ªÀÌ °°Àº °ÍÀ» È®ÀÎ
-		System.out.println("singletonService1 = " + singletonService1);
-		System.out.println("singletonService2 = " + singletonService2);
-		// singletonService1 == singletonService2
-		assertThat(singletonService1).isSameAs(singletonService2);
-		singletonService1.logic();
-	}
+    @Test
+    @DisplayName("ì‹±ê¸€í†¤ íŒ¨í„´ì„ ì ìš©í•œ ê°ì²´ ì‚¬ìš©")
+    public void singletonServiceTest() {
+        // privateìœ¼ë¡œ ìƒì„±ìë¥¼ ë§‰ì•„ë‘ì—ˆë‹¤. ì»´íŒŒì¼ ì˜¤ë¥˜ê°€ ë°œìƒí•œë‹¤.
+        // new SingletonService();
+        // 1. ì¡°íšŒ: í˜¸ì¶œí•  ë•Œ ë§ˆë‹¤ ê°™ì€ ê°ì²´ë¥¼ ë°˜í™˜
+        SingletonService singletonService1 = SingletonService.getInstance();
+        // 2. ì¡°íšŒ: í˜¸ì¶œí•  ë•Œ ë§ˆë‹¤ ê°™ì€ ê°ì²´ë¥¼ ë°˜í™˜
+        SingletonService singletonService2 = SingletonService.getInstance();
+        // ì°¸ì¡°ê°’ì´ ê°™ì€ ê²ƒì„ í™•ì¸
+        System.out.println("singletonService1 = " + singletonService1);
+        System.out.println("singletonService2 = " + singletonService2);
+        // singletonService1 == singletonService2
+        assertThat(singletonService1).isSameAs(singletonService2);
+        singletonService1.logic();
+    }
+    @Test
+    @DisplayName("ìŠ¤í”„ë§ ì»¨í…Œì´ë„ˆì™€ ì‹±ê¸€í†¤")
+    void springContainer() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+        //1. ì¡°íšŒ: í˜¸ì¶œí•  ë•Œ ë§ˆë‹¤ ê°™ì€ ê°ì²´ë¥¼ ë°˜í™˜
+        MemberService memberService1 = ac.getBean("memberService", MemberService.class);
+        //2. ì¡°íšŒ: í˜¸ì¶œí•  ë•Œ ë§ˆë‹¤ ê°™ì€ ê°ì²´ë¥¼ ë°˜í™˜
+        MemberService memberService2 = ac.getBean("memberService", MemberService.class);
+        //ì°¸ì¡°ê°’ì´ ê°™ì€ ê²ƒì„ í™•ì¸
+        System.out.println("memberService1 = " + memberService1);
+        System.out.println("memberService2 = " + memberService2);
+        //memberService1 == memberService2
+        assertThat(memberService1).isSameAs(memberService2);
+    }
 }

@@ -2,12 +2,14 @@ package hello.itemservice.domain.item;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.ScriptAssert;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
+//@ScriptAssert(lang = "javascript", script = "_this.price * _this.quantity >= 10000", message = "최소 주문 금액은 10000 이상이어야 합니다.")
 public class Item {
 
     private Long id;
